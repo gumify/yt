@@ -88,7 +88,7 @@ class YouTube(private val context: Context) {
                 form = mix("vid" to videoId, "k" to token))
                 .resolve { resp ->
                     try {
-                        listener.onSuccess(JSONObject(resp.text!!).getString("dlink"))
+                        onUiThread { listener.onSuccess(JSONObject(resp.text!!).getString("dlink")) }
                     } catch (e: Exception) {
                         onUiThread { listener.onError() }
                     }
